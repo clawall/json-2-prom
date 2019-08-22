@@ -3,7 +3,11 @@ const get = require('lodash/get')
 const has = require('lodash/has')
 const isEmpty = require('lodash/isEmpty')
 const lowerCase = require('lodash/lowerCase')
+const replace = require('lodash/replace')
 const stringifyObject = require('stringify-object')
+
+const promLabelRegex = /:\s/gm
+const promLabelSepRegex = /,\s/gm
 
 const extractLabels = (labels) => (!isEmpty(labels)
   ? stringifyObject(labels, {
@@ -20,7 +24,10 @@ const convertSingleMetric = (name, metric, options) => {
     ...get(metric, 'labels', {})
   }
 
-  return `${name}${extractLabels(labels)} ${get(metric, 'value')}`
+  const extracted = extractLabels(labels)
+  const finalLabel = replace(replace(extracted, promLabelRegex, '='), promLabelSepRegex, ',')
+
+  return `${name}${finalLabel} ${get(metric, 'value')}`
 }
 
 const convertSingleAggregator = (aggr, options) => {

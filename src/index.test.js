@@ -1,19 +1,17 @@
 const json2Prom = require('./index')
-const example = require('./example.json')
+const example = require('./__tests__/example.json')
 
 describe('Test cases invoking without options.', () => {
   it('Should work with a fully correct example.', () => {
-    const expected = [
-      '# HELP cowboy_errors_total Total number of Cowboy request errors.',
+    const expected = ['# HELP cowboy_errors_total Total number of Cowboy request errors.',
       '# TYPE cowboy_errors_total counter',
       '# HELP cowboy_early_errors_total Total number of Cowboy early errors.',
       '# TYPE cowboy_early_errors_total counter',
       'cowboy_early_errors_total 0',
       '# HELP rabbitmq_exchange_messages_published_out_total Count of messages published "out" of an exchange, i.e. taking account of routing.',
       '# TYPE rabbitmq_exchange_messages_published_out_total counter',
-      'rabbitmq_exchange_messages_published_out_total{vhost: "/", exchange: "MY_EXCHANGE", type: "headers"} 0',
-      'rabbitmq_exchange_messages_published_out_total{vhost: "/", exchange: "ANOTHER_EXCHANGE", type: "x-delayed-message"} 0'
-    ]
+      'rabbitmq_exchange_messages_published_out_total{vhost="/",exchange="MY_EXCHANGE",type="headers"} 0',
+      'rabbitmq_exchange_messages_published_out_total{vhost="/",exchange="ANOTHER_EXCHANGE",type="x-delayed-message"} 0']
 
     expect(json2Prom(example)).toEqual(expect.arrayContaining(expected))
   })
@@ -75,7 +73,7 @@ describe('Test cases invoking without options.', () => {
     ]))
   })
 
-  it('Should work without type, help or metric.', () => {
+  it('Should work without type,help or metric.', () => {
     const arg = {
       name: 'cowboy_errors_total'
     }
@@ -95,11 +93,11 @@ describe('Test cases invoking with options set.', () => {
       '# TYPE cowboy_errors_total counter',
       '# HELP cowboy_early_errors_total Total number of Cowboy early errors.',
       '# TYPE cowboy_early_errors_total counter',
-      'cowboy_early_errors_total{app_name: "my_app", another: "label"} 0',
+      'cowboy_early_errors_total{app_name="my_app",another="label"} 0',
       '# HELP rabbitmq_exchange_messages_published_out_total Count of messages published "out" of an exchange, i.e. taking account of routing.',
       '# TYPE rabbitmq_exchange_messages_published_out_total counter',
-      'rabbitmq_exchange_messages_published_out_total{app_name: "my_app", another: "label", vhost: "/", exchange: "MY_EXCHANGE", type: "headers"} 0',
-      'rabbitmq_exchange_messages_published_out_total{app_name: "my_app", another: "label", vhost: "/", exchange: "ANOTHER_EXCHANGE", type: "x-delayed-message"} 0'
+      'rabbitmq_exchange_messages_published_out_total{app_name="my_app",another="label",vhost="/",exchange="MY_EXCHANGE",type="headers"} 0',
+      'rabbitmq_exchange_messages_published_out_total{app_name="my_app",another="label",vhost="/",exchange="ANOTHER_EXCHANGE",type="x-delayed-message"} 0'
     ]
 
     expect(json2Prom(example, { defaultLabels: { app_name: 'my_app', another: 'label' } })).toEqual(expect.arrayContaining(expected))
@@ -130,7 +128,7 @@ describe('Test cases invoking with options set.', () => {
 
     expect(json2Prom(arg, { defaultLabels: { app_name: 'my_app' } })).toEqual(expect.arrayContaining([
       '# TYPE cowboy_errors_total counter',
-      'cowboy_errors_total{app_name: "my_app"} 10'
+      'cowboy_errors_total{app_name="my_app"} 10'
     ]))
   })
 
@@ -145,7 +143,7 @@ describe('Test cases invoking with options set.', () => {
 
     expect(json2Prom(arg, { defaultLabels: { app_name: 'my_app' } })).toEqual(expect.arrayContaining([
       '# HELP cowboy_errors_total Total number of Cowboy request errors.',
-      'cowboy_errors_total{app_name: "my_app"} 10'
+      'cowboy_errors_total{app_name="my_app"} 10'
     ]))
   })
 
@@ -158,11 +156,11 @@ describe('Test cases invoking with options set.', () => {
     }
 
     expect(json2Prom(arg, { defaultLabels: { app_name: 'my_app' } })).toEqual(expect.arrayContaining([
-      'cowboy_errors_total{app_name: "my_app"} 10'
+      'cowboy_errors_total{app_name="my_app"} 10'
     ]))
   })
 
-  it('Should work without type, help or metric.', () => {
+  it('Should work without type,help or metric.', () => {
     const arg = {
       name: 'cowboy_errors_total'
     }

@@ -6,6 +6,9 @@ module.exports = {
     '<rootDir>/node_modules',
     '<rootDir>/test'
   ],
+  coverageReporters: [
+    'json-summary'
+  ],
   globals: {
     __DEV__: true
   }

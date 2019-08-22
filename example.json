@@ -1,0 +1,41 @@
+[
+    {
+        "name": "cowboy_errors_total",
+        "help": "Total number of Cowboy request errors.",
+        "type": "COUNTER",
+        "metrics": []
+    },
+    {
+        "name": "cowboy_early_errors_total",
+        "help": "Total number of Cowboy early errors.",
+        "type": "COUNTER",
+        "metrics": [
+            {
+                "value": "0"
+            }
+        ]
+    },
+    {
+        "name": "rabbitmq_exchange_messages_published_out_total",
+        "help": "Count of messages published \"out\" of an exchange, i.e. taking account of routing.",
+        "type": "COUNTER",
+        "metrics": [
+            {
+                "value": "0",
+                "labels": {
+                    "vhost": "/",
+                    "exchange": "MY_EXCHANGE",
+                    "type": "headers"
+                }
+            },
+            {
+                "value": "0",
+                "labels": {
+                    "vhost": "/",
+                    "exchange": "ANOTHER_EXCHANGE",
+                    "type": "x-delayed-message"
+                }
+            }
+        ]
+    }
+]

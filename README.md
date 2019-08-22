@@ -1,4 +1,5 @@
 # json-2-prom
+![coverage](https://img.shields.io/coveralls/github/clawall/json-2-prom/master)&middot;[![npm version](https://badge.fury.io/js/json-2-prom.svg)](https://badge.fury.io/js/json-2-prom)
 
 Converts prom2json's format back to prometheus text.
 ---

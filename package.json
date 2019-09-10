@@ -1,6 +1,6 @@
 {
   "name": "json-2-prom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Converts prom2json's format back to prometheus text.",
   "main": "src/index.js",
   "repository": "git@github.com:clawall/json-2-prom.git",

@@ -27,6 +27,10 @@ const convertSingleMetric = (name, metric, options) => {
   const extracted = extractLabels(labels)
   const finalLabel = replace(replace(extracted, promLabelRegex, '='), promLabelSepRegex, ',')
 
+  if (get(options, 'isSummary', false)) {
+    return [`${name}_sum${finalLabel} ${get(metric, 'sum')}`, `${name}_count${finalLabel} ${get(metric, 'count')}`]
+  }
+
   return `${name}${finalLabel} ${get(metric, 'value')}`
 }
 
@@ -40,6 +44,10 @@ const convertSingleAggregator = (aggr, options) => {
 
   if (has(aggr, 'type')) {
     resultingLines = [...resultingLines, `# TYPE ${name} ${lowerCase(get(aggr, 'type', ''))}`]
+
+    if (get(aggr, 'type') === 'SUMMARY') {
+      return [...resultingLines, ...(get(aggr, 'metrics', []).map((metric) => convertSingleMetric(name, metric, { ...options, isSummary: true })))]
+    }
   }
 
   return [...resultingLines, ...(get(aggr, 'metrics', []).map((metric) => convertSingleMetric(name, metric, options)))]

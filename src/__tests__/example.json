@@ -16,6 +16,21 @@
         ]
     },
     {
+        "name": "telemetry_scrape_duration_seconds",
+        "help": "Scrape duration",
+        "type": "SUMMARY",
+        "metrics": [
+            {
+                "labels": {
+                    "content_type": "text/plain; version=0.0.4",
+                    "registry": "default"
+                },
+                "count": "63013",
+                "sum": "5656.608130169"
+            }
+        ]
+    },
+    {
         "name": "rabbitmq_exchange_messages_published_out_total",
         "help": "Count of messages published \"out\" of an exchange, i.e. taking account of routing.",
         "type": "COUNTER",

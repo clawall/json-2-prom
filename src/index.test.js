@@ -11,7 +11,11 @@ describe('Test cases invoking without options.', () => {
       '# HELP rabbitmq_exchange_messages_published_out_total Count of messages published "out" of an exchange, i.e. taking account of routing.',
       '# TYPE rabbitmq_exchange_messages_published_out_total counter',
       'rabbitmq_exchange_messages_published_out_total{vhost="/",exchange="MY_EXCHANGE",type="headers"} 0',
-      'rabbitmq_exchange_messages_published_out_total{vhost="/",exchange="ANOTHER_EXCHANGE",type="x-delayed-message"} 0']
+      'rabbitmq_exchange_messages_published_out_total{vhost="/",exchange="ANOTHER_EXCHANGE",type="x-delayed-message"} 0',
+      '# TYPE telemetry_scrape_duration_seconds summary',
+      '# HELP telemetry_scrape_duration_seconds Scrape duration',
+      'telemetry_scrape_duration_seconds_count{content_type="text/plain; version=0.0.4",registry="default"} 63013',
+      'telemetry_scrape_duration_seconds_sum{content_type="text/plain; version=0.0.4",registry="default"} 5656.608130169']
 
     expect(json2Prom(example)).toEqual(expect.arrayContaining(expected))
   })

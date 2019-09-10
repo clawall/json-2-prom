@@ -1,5 +1,5 @@
 # json-2-prom
-[![npm version](https://badge.fury.io/js/json-2-prom.svg)](https://www.npmjs.com/package/json-2-prom)&middot;![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)&middot;![coverage](./coverage/badge.svg)
+[![npm version](https://badge.fury.io/js/json-2-prom.svg)](https://www.npmjs.com/package/json-2-prom)&middot;![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 Converts prom2json's format back to prometheus text.
 ---
